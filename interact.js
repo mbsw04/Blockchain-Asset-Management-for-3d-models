@@ -4,12 +4,12 @@ const { ethers } = require("ethers");
 const abi = require('./shared/abi.json');
 
 const provider = new ethers.JsonRpcProvider("http://localhost:8545");
-const signer = new ethers.Wallet("0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a00f314a14f6b9e3e11", provider); // Anvil default
+const signer = new ethers.Wallet("0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a00f314a14f6b9e3e11", provider);
 
 const contractAddressPath = "./shared/contract-address.txt";
 
 async function main() {
-    const bytecode = ""; // Put compiled bytecode here if needed
+    const bytecode = ""; 
     const ContractFactory = new ethers.ContractFactory(abi, bytecode, signer);
 
     let contract;
