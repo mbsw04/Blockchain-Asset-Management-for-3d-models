@@ -15,5 +15,5 @@ services:
     ports:
       - "8546:8545"
     volumes:
-      - C:/Users/ Nucle/Documents/my-foundry-project:/app
+      - C:/Users/Nucle/Documents/my-foundry-project:/app
     working_dir: /app
