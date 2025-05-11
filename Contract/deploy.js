@@ -1,8 +1,6 @@
 const { ethers } = require("ethers");
 const fs = require("fs");
 
-// Replace with your ABI and Bytecode
-
 async function main() {
   const provider = new ethers.JsonRpcProvider("http://localhost:8545");
   const wallet = new ethers.Wallet(
@@ -18,7 +16,7 @@ async function main() {
   const bytecode = compiled.bytecode;
 
   const factory = new ethers.ContractFactory(abi, bytecode, wallet);
-  const contract = await factory.deploy(...args);
+  const contract = await factory.deploy();
   await contract.waitForDeployment();
 
   const A_balance = await provider.getBalance(wallet.address);
