@@ -1,6 +1,12 @@
 
 # Sepolia-compatible Anvil nodes Docker Simulation with Asset Management
 
+## Prerequisite
+
+- Node.js
+- ethers.js
+- Docker
+  
 ## Features
 
 - Two Sepolia-compatible Anvil nodes in Docker
