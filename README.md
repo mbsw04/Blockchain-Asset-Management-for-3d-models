@@ -1,5 +1,5 @@
 
-# Sepolia Docker Two-Node Simulation with Asset Management
+# Sepolia-compatible Anvil nodes Docker Simulation with Asset Management
 
 ## Features
 
@@ -11,25 +11,20 @@
 ## Structure
 
 - `docker-compose.yml`: Starts two Anvil nodes
-- `interact.js`: Script to create asset and save a local `.obj` file
-- `shared/`: Contains ABI and Solidity source
-- `assets/`: Stores `.obj` files created
+- `test.js`: Script to deploy the contract and test contract interactions
+- `Contract/`: Contains ABI and Solidity sources
+- `node_modules/`: Stores Dependencies
 
 ## Run Instructions
 
 1. **Start Nodes:**
    ```bash
-   docker-compose up --build
+   docker-compose up 
    ```
-
-2. **Deploy Contract (manual step)** using Foundry or Remix and save address to:
-   ```
-   shared/contract-address.txt
-   ```
-
-3. **Run Script:**
+   
+2. **Run Script:**
    ```bash
-   node interact.js
+   node test.js
    ```
 
-This creates a new asset, registers it on the chain, and saves a `.obj` file to your host.
+This creates a new token with an example URL of the file's location and registers it on the chain.
