@@ -12,7 +12,7 @@
 - Two Sepolia-compatible Anvil nodes in Docker
 - Node interaction via JavaScript (`ethers.js`)
 - Smart contract to register `.obj` assets on-chain
-- Assets saved to local `./assets/` directory, associated with Ethereum addresses
+- `(IN WORKS)` Assets saved to an S3 bucket, associated with Ethereum addresses
 
 ## Structure
 
