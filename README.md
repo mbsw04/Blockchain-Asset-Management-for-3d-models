@@ -11,7 +11,7 @@
 ## Structure
 
 - `docker-compose.yml`: Starts two Anvil nodes
-- `test.js`: Script to deploy the contract and test contract interactions
+- `Contract/test.js`: Script to deploy the contract and test contract interactions
 - `Contract/`: Contains ABI and Solidity sources
 - `node_modules/`: Stores Dependencies
 
