@@ -54,7 +54,6 @@ contract AssetManager is ERC721, Ownable {
         require(ownerOf(tokenId) == msg.sender, "Not the owner");
         Asset storage asset = assets[tokenId];
         asset.hasUsageRight[user] = false;
-        // Optional: remove from usageRights array (gas expensive)
     }
 
     // View: Check if user has usage rights
