@@ -33,4 +33,4 @@
    node test.js
    ```
 
-This creates a new token with an example URL of the file's location and registers it on the chain.
+This creates a new token with a URL of the file's location and registers it on the chain.
