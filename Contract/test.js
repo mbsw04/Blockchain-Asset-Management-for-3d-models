@@ -6,8 +6,8 @@ const dotenv = require("dotenv")
 dotenv.config();
 
 // S3 Configuration
-const REGION = "us-east-1"; // region
-const BUCKET_NAME = "bc-assets-metaverse-app"; // S3 bucket
+const REGION = process.env.AWS_REGION; // region
+const BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME; // S3 bucket
 const s3 = new S3Client({
   region: REGION,
   credentials: {
@@ -44,7 +44,7 @@ async function uploadRenamedFile(localFilePath, newFileName) {
 }
 
 async function main() {
-  const provider = new ethers.JsonRpcProvider("http://localhost:8545");
+  const provider = new ethers.JsonRpcProvider("http://localhost:8545"); // process.env.BLOCKCHAIN_ENDPOINT
 
   const wallet = new ethers.Wallet(
     "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80", // funded account from Anvil
@@ -69,7 +69,7 @@ async function main() {
   // Mint an asset
   const tokenId = 0;
   const localFilePath = "./test.glb"
-  const s3Url = await uploadRenamedFile(localFilePath, tokenId); //"https://example.com/model.glb";
+  const s3Url = await uploadRenamedFile(localFilePath, tokenId); // "https://example.com/model.glb";
   const to = wallet.address;
 
   const mintTx = await contract.mint(s3Url, to);
