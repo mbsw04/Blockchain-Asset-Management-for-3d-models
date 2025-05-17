@@ -6,6 +6,7 @@
 - Node.js
 - ethers.js
 - AWS SDK
+- DOTENV
 - Docker
   
 ## Features
@@ -25,6 +26,8 @@
 
 1. **Add and configure .env:**
    ```bash
+   AWS_REGION=your-region
+   AWS_S3_BUCKET_NAME=your-bucket
    AWS_ACCESS_KEY_ID=your-access-key
    AWS_SECRET_ACCESS_KEY=your-secret-key
    ```
