@@ -1,5 +1,47 @@
-const { ethers } = require("ethers");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const fs = require("fs");
+const path = require("path");
+const { ethers } = require("ethers");
+const dotenv = require("dotenv")
+dotenv.config();
+
+// S3 Configuration
+const REGION = "us-east-1"; // region
+const BUCKET_NAME = "bc-assets-metaverse-app"; // S3 bucket
+const s3 = new S3Client({
+  region: REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+});
+
+
+//File Upload function
+async function uploadRenamedFile(localFilePath, newFileName) {
+  try {
+    const fileExt = path.extname(localFilePath);
+    const newKey = newFileName + fileExt;
+    const fileStream = fs.createReadStream(localFilePath);
+
+    const uploadParams = {
+      Bucket: BUCKET_NAME,
+      Key: newKey,
+      Body: fileStream,
+      //ACL: "public-read", // makes the file publicly accessible
+    };
+
+    await s3.send(new PutObjectCommand(uploadParams));
+
+    const publicUrl = `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com/${newKey}`;
+    console.log("Upload successful. Download link:");
+    console.log(publicUrl);
+
+    return publicUrl;
+  } catch (err) {
+    console.error("Upload failed:", err);
+  }
+}
 
 async function main() {
   const provider = new ethers.JsonRpcProvider("http://localhost:8545");
@@ -26,7 +68,8 @@ async function main() {
 
   // Mint an asset
   const tokenId = 0;
-  const s3Url = "https://example.com/model.glb";
+  const localFilePath = "./test.glb"
+  const s3Url = await uploadRenamedFile(localFilePath, tokenId); //"https://example.com/model.glb";
   const to = wallet.address;
 
   const mintTx = await contract.mint(s3Url, to);
