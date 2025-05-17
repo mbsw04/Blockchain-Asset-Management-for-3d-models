@@ -66,14 +66,19 @@ async function main() {
   console.log('Deploy Process END');
   console.log('Minting Process Start....');
 
-  // Mint an asset
-  const tokenId = 0;
-  const localFilePath = "./test.glb"
-  const s3Url = await uploadRenamedFile(localFilePath, tokenId); // "https://example.com/model.glb";
+  // Get current nextTokenId from contract (read before minting)
+  const nextTokenId = await contract.nextTokenId(); // returns BigNumber
+
+  const localFilePath = "./test.glb";
+  const s3Url = await uploadRenamedFile(localFilePath, Number(nextTokenId));
+
   const to = wallet.address;
 
   const mintTx = await contract.mint(s3Url, to);
-  await mintTx.wait();
+  const receipt = await mintTx.wait();
+
+  const tokenId = nextTokenId;
+
   console.log(`Minted token #${tokenId} to ${to}`);
 
   console.log('Minting Process END');

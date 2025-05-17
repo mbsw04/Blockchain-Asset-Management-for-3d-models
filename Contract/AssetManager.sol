@@ -18,11 +18,12 @@ contract AssetManager is ERC721, Ownable {
     constructor() ERC721("GLBAsset", "GLBA") Ownable(msg.sender) {}
 
     // Mint a new asset with S3 URL
-    function mint(string memory s3Url, address to) external onlyOwner {
-        uint256 tokenId = nextTokenId;
+    function mint(string memory s3Url, address to) external onlyOwner returns (uint256 tokenId) {
+        tokenId = nextTokenId;
         _mint(to, tokenId);
         assets[tokenId].s3Url = s3Url;
         nextTokenId++;
+        return tokenId;
     }
 
     // Transfer ownership (ERC721 standard already handles this)
