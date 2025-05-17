@@ -19,9 +19,10 @@
 ## Structure
 
 - `docker-compose.yml`: Starts two Anvil nodes
-- `Contract/test.js`: Script to deploy the contract and test contract interactions
-- `Contract/`: Contains ABI and Solidity sources
-
+- `Contract/`: Contains ABI, Solidity sources, and test interactions.
+- `Contract/test.js`: Script to deploy the contract and test contract interactions.
+- `Contract/view.js`: Script to show the contents(ETHs and NFTs) of the test wallets.
+  
 ## Run Instructions
 
 1. **Add and configure .env:**
@@ -41,5 +42,3 @@
    ```bash
    node test.js
    ```
-
-This creates a new token with a URL of the file's location and registers it on the chain.
