@@ -5,6 +5,7 @@
 
 - Node.js
 - ethers.js
+- AWS SDK
 - Docker
   
 ## Features
@@ -19,16 +20,21 @@
 - `docker-compose.yml`: Starts two Anvil nodes
 - `Contract/test.js`: Script to deploy the contract and test contract interactions
 - `Contract/`: Contains ABI and Solidity sources
-- `node_modules/`: Stores Dependencies
 
 ## Run Instructions
 
-1. **Start Nodes:**
+1. **Add and configure .env:**
+   ```bash
+   AWS_ACCESS_KEY_ID=your-access-key
+   AWS_SECRET_ACCESS_KEY=your-secret-key
+   ```
+   
+2. **Start Nodes:**
    ```bash
    docker-compose up 
    ```
    
-2. **Run Script:**
+3. **Run Script:**
    ```bash
    node test.js
    ```
