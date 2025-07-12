@@ -3,6 +3,7 @@ const { ethers } = require("ethers");
 const contractAbi = [
   "function balanceOf(address owner) view returns (uint256)",
   "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint256)",
+  "function getAsset(uint256 tokenId) view returns (string memory, address[] memory)"
 ];
 
 async function main() {
@@ -15,7 +16,6 @@ async function main() {
   const contractAddress = args[0];
   const provider = new ethers.JsonRpcProvider("http://localhost:8545");
   const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-
   const accounts = await provider.send("eth_accounts", []);
 
   console.log(`Token holdings for contract: ${contractAddress}`);
@@ -38,9 +38,11 @@ async function main() {
     for (let j = 0; j < nftBalance; j++) {
       try {
         const tokenId = await contract.tokenOfOwnerByIndex(address, j);
+        const [url, users] = await contract.getAsset(tokenId);
         console.log(`  - Token ID: ${tokenId.toString()}`);
+        console.log(`    - URL: ${url}`);
+        console.log(`    - Usage Rights:`, users);
       } catch {
-        // silently skip if tokenOfOwnerByIndex is unsupported
         break;
       }
     }
